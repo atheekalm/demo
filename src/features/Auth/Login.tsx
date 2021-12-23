@@ -1,9 +1,34 @@
-import { Copyright } from "@mui/icons-material";
-import { Container, CssBaseline, Box, Typography, TextField, FormControlLabel, Checkbox, Button, Grid } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import { Container, CssBaseline, Box, Typography, TextField, Grid } from "@mui/material";
+import { FieldValues, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 
 export default function Login() {
+
+    const { register, handleSubmit, formState: { isSubmitting, errors, isValid } } = useForm(
+        {
+            mode: 'all'
+        }
+    );
+
+    function submitForm(data: FieldValues) {
+        console.log(data)
+    }
+    // const [values, setVAlues] = useState(
+    //     {
+    //         username:'',
+    //         password:''
+    //     }
+    // );
+    // const handleSubmit=(event:any)=>{
+    //     event.preventDefault();
+    //     console.log(values)
+    // }
+    // function handleInput(event:any){
+    //     const {name,value}=event.target;
+    //     setVAlues({...values,[name]:value});
+    // }
     return (
         <>
             <Container component="main" maxWidth="xs">
@@ -20,35 +45,41 @@ export default function Login() {
                     <Typography component="h1" variant="h5">
                         Login
                     </Typography>
-                    <Box component="form" noValidate sx={{ mt: 1 }}>
+                    <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit(submitForm)}>
                         <TextField
                             margin="normal"
                             required
                             fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
+                            label="Username"
                             autoFocus
+                            {...register('Username', { required: 'Username is Required' })}
+                            error={!!errors.Username}
+                            helperText={errors?.Username?.message}
+                        // onChange={handleInput}
+                        // value={values.username}
+
                         />
                         <TextField
                             margin="normal"
-                            required
                             fullWidth
-                            name="password"
                             label="Password"
                             type="password"
-                            id="password"
-                            autoComplete="current-password"
+                            {...register('password', { required: 'Password is Required' })}
+                            error={!!errors.password}
+                            helperText={errors?.password?.message}
+                        // onChange={handleInput}
+                        // value={values.password}
                         />
-                        <Button
+                        <LoadingButton
+                            disabled={!isValid}
+                            loading={isSubmitting}
                             type="submit"
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Sign In
-                        </Button>
+                            LogIn
+                        </LoadingButton>
                         <Grid container>
                             <Grid item>
                                 <Link to='/Register'>

@@ -1,10 +1,20 @@
 import { Container, CssBaseline, Box, Typography, TextField, Button, Grid } from "@mui/material";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Register() {
+    const [values, setVAlue] = useState(
+        {
+            username:'',
+            password:''
+        }
+    );
+    const handleSubmit=()=>{
+        console.log(values)
+    }
     return (
         <>
-            <Container component="main" maxWidth="xs">
+            <Container component="main" maxWidth="sm">
                 <CssBaseline />
                 <Box
                     sx={{
@@ -17,7 +27,7 @@ export default function Register() {
                     <Typography component="h1" variant="h5">
                         Register
                     </Typography>
-                    <Box component="form" noValidate sx={{ mt: 1 }}>
+                    <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
                         <TextField
                             margin="normal"
                             required
@@ -53,7 +63,7 @@ export default function Register() {
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Sign In
+                            Register
                         </Button>
                         <Grid container>
                             <Grid item>
