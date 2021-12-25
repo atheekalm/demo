@@ -1,19 +1,23 @@
 import { LoadingButton } from "@mui/lab";
 import { Container, CssBaseline, Box, Typography, TextField, Grid } from "@mui/material";
 import { FieldValues, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { loginUser } from "./authSlice";
 
 
 export default function Login() {
-
+    const history = useHistory();
+    const dispatch = useDispatch();
     const { register, handleSubmit, formState: { isSubmitting, errors, isValid } } = useForm(
         {
             mode: 'all'
         }
     );
 
-    function submitForm(data: FieldValues) {
-        console.log(data)
+    async function submitForm(data: FieldValues) {
+        await dispatch(loginUser(data));
+        history.push('/');
     }
     // const [values, setVAlues] = useState(
     //     {

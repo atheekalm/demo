@@ -1,16 +1,10 @@
 import { Container, CssBaseline, Box, Typography, TextField, Button, Grid } from "@mui/material";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Register() {
-    const [values, setVAlue] = useState(
-        {
-            username:'',
-            password:''
-        }
-    );
+
     const handleSubmit=()=>{
-        console.log(values)
+        console.log()
     }
     return (
         <>
